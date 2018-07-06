@@ -1,45 +1,55 @@
+# NodeJs SSO 单点登录实例
+
 > 项目来源：此项目 fork 了 `https://github.com/hezhii/nodejs-sso-example.git` ， 然后在这个项目上增加了单点注销的功能.
 
-# Node.js 单点登录实例
+该实例实现了单点登录，单点注销的功能，使用 Express + MongoDb 实现， MongoDb 主要用于子系统的 Session 保存和 SSO 保存子系统的 SID(sessionId) 和 对应的 token.
 
-一个基于 Express 实现的 Node.js 单点登录实例，核心思路是通过重定向到统一的认证中心进行登录验证。
+## 一、单点登录
 
-不过，通过研究淘宝 & 天猫、京东和谷歌的单点登录机制发现，他们都是通过跨域设置 cookie 来实现的，其中淘宝和京东通过 JSONP 设置，谷歌通过重定向方式设置，计划日后通过这样的方式再实现一个例子。
+> from [《百度百科》](https://baike.baidu.com/item/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/4940767?fr=aladdin)
 
-## 如何测试
+单点登录（Single Sign On），简称为 SSO，是目前比较流行的企业业务整合的解决方案之一。SSO 的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。
 
-运行 Demo 需要先安装 Node.js 和 cnpm
+## 二、效果
 
-1.  **git st**：
+![sso.gif](./doc/img/sso.gif)
+
+## 三、如何运行
+
+### 3.1 下载代码，安装依赖
 
 ```bash
-$ git clone https://github.com/hezhii/nodejs-sso-example.git
-$ cd nodejs-sso-example
-$ cnpm install
+git clone https://github.com/zhongxia245/nodejs-sso-example.git
+
+cd nodejs-sso-example
+
+cnpm install
 ```
 
-2.  **启动服务**
+### 3.2 启动服务
 
-启动服务前先修改本地的 hosts 文件，macOS 位于 `/private/etc/hosts`，windows 位于 `C:\Windows\System32\drivers\etc\hosts`。
+启动服务前先修改本地的 hosts 文件，macOS 位于 /private/etc/hosts，windows 位于 C:\Windows\System32\drivers\etc\hosts。
 
 在文件最后加上一行：`127.0.0.1 www.a.com www.b.com passport.com`
 
 然后分别启动三个服务：
 
 ```bash
-$ cd passport
-$ node app.js
-$ cd ../system
-$ PORT=8081 SERVER_NAME=a node app.js
-$ PORT=8082 SERVER_NAME=b node app.js
+cd passport
+
+node app.js
+
+cd ../system
+
+PORT=8081 SERVER_NAME=a node app.js
+
+PORT=8082 SERVER_NAME=b node app.js
 ```
 
-3.  **单点登录测试**
+## 四、附上一张 SSO 单点登录的原理图
 
-打开浏览器访问 `www.a.com:8081`，发现会被重定向到 `passport.com`，输入用户名和密码后登录。
+单点登录
+![](./doc/img/login.png)
 
-接着新开一个窗口访问 `www.b.com:8082`，发现不需要登录直接可以访问。
-
-4.  **单点注销测试**
-
-在`www.a.com:8081`，`www.b.com:8082` 登录的情况下，退出 a 系统，然后到 b 系统刷新页面，会发现 b 系统也退出了
+单点注销
+![](./doc/img/logout.png)

@@ -30,6 +30,7 @@ router.get('/', async (req, res, next) => {
       session_id: sessionId
     })
     await clientSession.save()
+    
     result.error = 0
     // 用户 id，从 token 中解密获取到
     result.userId = getDecAse192(token, secret)
