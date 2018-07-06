@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SSO 首页</title>
+</head>
+
+<body>
+  <h1>SSO 单点登录系统</h1>
+  <h4>当前用户：
+    <% if(user) { %>
+      <label>
+        <span>
+          <%= user %>
+        </span>
+        <a style="margin-left:20px;" href="/login/logout">注销</a>
+      </label>
+      <% } else{ %>
+        <a href="/login">去登录</a>
+        <% } %>
+  </h4>
+  <h3>
+    <a href="http://www.a.com:8081">系统 A</a>
+  </h3>
+  <h3>
+    <a href="http://www.b.com:8082">系统 B</a>
+  </h3>
+</body>
+
+</html>

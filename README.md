@@ -1,3 +1,5 @@
+> 项目来源：此项目 fork 了 `https://github.com/hezhii/nodejs-sso-example.git` ， 然后在这个项目上增加了单点注销的功能.
+
 # Node.js 单点登录实例
 
 一个基于 Express 实现的 Node.js 单点登录实例，核心思路是通过重定向到统一的认证中心进行登录验证。
@@ -6,24 +8,24 @@
 
 ## 如何测试
 
-运行 Demo 需要先安装 Node.js 和 Yarn。
+运行 Demo 需要先安装 Node.js 和 cnpm
 
-1. **克隆仓库并安装依赖**：
+1.  **git st**：
 
 ```bash
 $ git clone https://github.com/hezhii/nodejs-sso-example.git
 $ cd nodejs-sso-example
-$ yarn install
+$ cnpm install
 ```
 
-2. **启动服务**
+2.  **启动服务**
 
 启动服务前先修改本地的 hosts 文件，macOS 位于 `/private/etc/hosts`，windows 位于 `C:\Windows\System32\drivers\etc\hosts`。
-  
+
 在文件最后加上一行：`127.0.0.1 www.a.com www.b.com passport.com`
-  
+
 然后分别启动三个服务：
-  
+
 ```bash
 $ cd passport
 $ node app.js
@@ -32,8 +34,12 @@ $ PORT=8081 SERVER_NAME=a node app.js
 $ PORT=8082 SERVER_NAME=b node app.js
 ```
 
-3. **测试**
+3.  **单点登录测试**
 
 打开浏览器访问 `www.a.com:8081`，发现会被重定向到 `passport.com`，输入用户名和密码后登录。
 
 接着新开一个窗口访问 `www.b.com:8082`，发现不需要登录直接可以访问。
+
+4.  **单点注销测试**
+
+在`www.a.com:8081`，`www.b.com:8082` 登录的情况下，退出 a 系统，然后到 b 系统刷新页面，会发现 b 系统也退出了
