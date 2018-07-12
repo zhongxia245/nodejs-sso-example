@@ -75,8 +75,6 @@ router.get('/logout', async (req, res) => {
   await ClientSession.deleteMany({ ticket: token })
   res.clearCookie('token')
 
-  console.log(req)
-
   // 有回调地址就跳过去，否则就调到登录页面
   if (req.headers.referer) {
     res.redirect(req.headers.referer)

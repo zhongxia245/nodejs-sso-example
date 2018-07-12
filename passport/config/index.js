@@ -1,6 +1,6 @@
 module.exports = {
   secret: 'zhongxia',
   mongoose: {
-    url: 'mongodb://localhost/xt-sso'
+    url: 'mongodb://localhost:27017/xt-sso'
   }
 }
